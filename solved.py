@@ -11,6 +11,6 @@ problem = config.random_data("Problems")
 reason = config.random_data("Reasons")
 solution = config.random_data("Solutions")
 
-message = re.sub("{{[a-zA-Z]*}}","%s",config.get_message)
+message = re.sub("{{[a-zA-Z]*}}","%s",config.get_message())
 
-print(message % (problem, reason, solution)) 
+print(("\n" + message + "\n") % (problem, reason, solution)) 
