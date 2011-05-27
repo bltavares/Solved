@@ -1,12 +1,16 @@
-from solved_conf import *
+import solved_conf, argparse, re
 
-config = SolvedConf()
+parser = argparse.ArgumentParser("Having troubles with clients? Try it!")
+parser.add_argument('-s', '--section', help = "Set the section to use on the config file", default = "Default")
+parser.add_argument('-f', '--file', help = "Set the config file", default = "solved.conf")
+args = parser.parse_args()
+
+config = solved_conf.SolvedConf( conf_file = args.file, section = args.section)
 
 problem = config.random_data("Problems")
 reason = config.random_data("Reasons")
 solution = config.random_data("Solutions")
 
-msg = "\nYou got %s, caused by %s and you MUST %s to solve it\n" % (problem, reason, solution) 
-print(msg)
+message = re.sub("{{[a-zA-Z]*}}","%s",config.get_message)
 
-
+print(message % (problem, reason, solution)) 
