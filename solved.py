@@ -1,18 +1,10 @@
-import configparser, random
+from solved_conf import *
 
-def getDataArr(config,data):
-  return config.get("Default",data).replace("\n","").split(",")
+config = SolvedConf()
 
-def getRandomData(config, data):
-  """docstring for getRandomData"""
-  return random.choice(getDataArr(config, data))
-
-Config = configparser.ConfigParser()
-Config.read("solved.conf")
-
-problem = getRandomData(Config,"Problems").strip() 
-reason = getRandomData(Config, "Reasons").strip()
-solution = getRandomData(Config, "Solutions").strip()
+problem = config.random_data("Problems")
+reason = config.random_data("Reasons")
+solution = config.random_data("Solutions")
 
 msg = "\nYou got %s, caused by %s and you MUST %s to solve it\n" % (problem, reason, solution) 
 print(msg)
